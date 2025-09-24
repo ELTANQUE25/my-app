@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./assets/components/organisms/Navbar";
+import Navbar from "./components/organisms/Navbar";
 import Home from "./pages/Home";
 import NewRecipe from "./pages/NewRecipe";
 import RecipeDetail from "./pages/RecipeDetail";
+
 
 export default function App() {
   return (
