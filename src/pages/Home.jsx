@@ -23,16 +23,21 @@ export default function Home() {
   }, [recipes, query, course, showOnlyFav]);
 
   return (
-    <main className="p-4 max-w-3xl mx-auto">
-      <div className="flex flex-col gap-3 mb-4">
-        <SearchBar onSearch={setQuery} />
-        <FiltersBar
-          course={course} setCourse={setCourse}
-          showOnlyFav={showOnlyFav} setShowOnlyFav={setShowOnlyFav}
-          onReset={() => { setQuery(""); setCourse(""); setShowOnlyFav(false); }}
-        />
+    <main className="container">
+      <div className="grid">
+        <div className="card">
+          <div className="grid cols-2">
+            <SearchBar onSearch={setQuery} />
+            <FiltersBar
+              course={course} setCourse={setCourse}
+              showOnlyFav={showOnlyFav} setShowOnlyFav={setShowOnlyFav}
+              onReset={() => { setQuery(""); setCourse(""); setShowOnlyFav(false); }}
+            />
+          </div>
+        </div>
+
+        <RecipeList recipes={filtered} onToggleFav={toggleFav} onDelete={remove} />
       </div>
-      <RecipeList recipes={filtered} onToggleFav={toggleFav} onDelete={remove} />
     </main>
   );
 }

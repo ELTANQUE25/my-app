@@ -1,9 +1,87 @@
-:root {
-
+/* —— Reset leggero & base —— */
+:root{
+  --bg: #f7f7fb;
+  --panel: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --brand: #f97316;      /* arancio GustoLab */
+  --brand-600:#ea580c;
+  --border:#e5e7eb;
+  --ring:#c7d2fe;
+  --radius:14px;
+  --shadow: 0 6px 24px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.04);
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: var(--text);
 }
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* —— Layout —— */
+.container{max-width:1000px; margin:0 auto; padding:24px;}
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding:18px;
 }
+.grid{display:grid; gap:16px}
+@media (min-width: 720px){ .grid.cols-2{grid-template-columns: 1fr 1fr} }
+
+/* —— Navbar —— */
+.navbar{
+  position: sticky; top:0; z-index:50;
+  display:flex; align-items:center; gap:16px;
+  padding:12px 20px;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:saturate(180%) blur(8px);
+  border-bottom:1px solid var(--border);
+}
+.navbar .brand{
+  display:flex; align-items:center; gap:10px; font-weight:700;
+}
+.navbar img.logo{height:80px; width:auto; display:block}
+.navbar .spacer{margin-left:auto}
+.navbar a{
+  color: var(--text); text-decoration:none; padding:8px 10px; border-radius:10px;
+}
+.navbar a.active, .navbar a:hover{ background:#f2f2f5 }
+
+/* —— Inputs & Button —— */
+.input, .select, textarea{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#fff;
+  outline:none;
+}
+.input:focus, .select:focus, textarea:focus{ box-shadow:0 0 0 3px var(--ring); border-color:#a5b4fc }
+
+.btn{
+  border:0; border-radius:12px; padding:10px 14px; cursor:pointer;
+  background:var(--brand); color:#fff; font-weight:600;
+  transition:transform .05s ease, background .2s ease, opacity .2s ease;
+}
+.btn:hover{ background:var(--brand-600) }
+.btn:active{ transform: translateY(1px) }
+.btn[disabled]{ opacity:.6; cursor:not-allowed }
+
+.btn-ghost{
+  background:transparent; color:var(--text);
+  border:1px solid var(--border);
+}
+.btn-ghost:hover{ background:#f7f7f9 }
+
+/* —— Piccole utility —— */
+.muted{color:var(--muted)}
+.link{ color: var(--brand); text-decoration:none; font-weight:600 }
+.link:hover{ text-decoration:underline }
+.row{display:flex; gap:12px; align-items:center}
+.wrap{flex-wrap:wrap}
+.space-between{justify-content:space-between}
+.mt-2{margin-top:8px} .mt-3{margin-top:12px} .mt-4{margin-top:16px}

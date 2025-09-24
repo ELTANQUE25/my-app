@@ -5,9 +5,7 @@ import Title from "../components/atoms/Title";
 import { useRecipes } from "../context/RecipesContext";
 import { useNavigate } from "react-router-dom";
 
-function slugify(s) {
-  return s.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9\-]/g,"");
-}
+function slugify(s){ return s.toLowerCase().trim().replace(/\s+/g,"-").replace(/[^a-z0-9\-]/g,""); }
 
 export default function NewRecipe() {
   const { add } = useRecipes();
@@ -19,7 +17,7 @@ export default function NewRecipe() {
   const [prep, setPrep] = useState(10);
   const [cook, setCook] = useState(10);
 
-  const canSave = title.trim().length > 0 && ingredients.trim().length > 0 && steps.trim().length > 0;
+  const canSave = title.trim() && ingredients.trim() && steps.trim();
 
   const handleSave = () => {
     const rec = {
@@ -36,23 +34,25 @@ export default function NewRecipe() {
   };
 
   return (
-    <main className="p-4 max-w-xl mx-auto">
-      <Title level={2}>Nuova ricetta</Title>
-      <div className="mt-4 flex flex-col gap-3">
-        <Input value={title} onChange={setTitle} placeholder="Titolo" />
-        <select className="border rounded px-3 py-2" value={course} onChange={e => setCourse(e.target.value)}>
-          <option value="primo">Primo</option>
-          <option value="secondo">Secondo</option>
-          <option value="dolce">Dolce</option>
-          <option value="altro">Altro</option>
-        </select>
-        <textarea className="border rounded p-2" rows={5} placeholder="Ingredienti (uno per riga)" value={ingredients} onChange={e=>setIngredients(e.target.value)} />
-        <textarea className="border rounded p-2" rows={6} placeholder="Passi (uno per riga)" value={steps} onChange={e=>setSteps(e.target.value)} />
-        <div className="flex gap-2">
+    <main className="container">
+      <div className="card" style={{maxWidth: 720, margin: "0 auto"}}>
+        <Title level={2}>Nuova ricetta</Title>
+        <div className="row mt-3">
+          <Input value={title} onChange={setTitle} placeholder="Titolo" />
+          <select className="select" value={course} onChange={e => setCourse(e.target.value)}>
+            <option value="primo">Primo</option>
+            <option value="secondo">Secondo</option>
+            <option value="dolce">Dolce</option>
+            <option value="altro">Altro</option>
+          </select>
+        </div>
+        <textarea className="mt-3" rows={5} placeholder="Ingredienti (uno per riga)" value={ingredients} onChange={e=>setIngredients(e.target.value)} />
+        <textarea className="mt-3" rows={6} placeholder="Passi (uno per riga)" value={steps} onChange={e=>setSteps(e.target.value)} />
+        <div className="row mt-3">
           <Input type="number" value={prep} onChange={setPrep} placeholder="Prep min" />
           <Input type="number" value={cook} onChange={setCook} placeholder="Cottura min" />
         </div>
-        <div className="flex gap-2">
+        <div className="row mt-3">
           <Button onClick={handleSave} disabled={!canSave}>Salva</Button>
           <Button variant="ghost" onClick={() => history.back()}>Annulla</Button>
         </div>
